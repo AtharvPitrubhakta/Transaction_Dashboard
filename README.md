@@ -66,7 +66,7 @@ Ensure you have the following installed on your machine:
 
 <h2>📬 Contact</h2>
 
-Feel free to get in touch with me through the following channels.
+Please feel free to reach out to me through the following channels.
 
 ## 🚀 Connect with me
 
