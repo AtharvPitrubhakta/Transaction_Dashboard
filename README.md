@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+<p align="center">
+  <a href="https://trasaction.vercel.app/" rel="noopener" target="_blank"><img width="150" src="https://github.com/AtharvPitrubhakta/Transaction_Management/blob/main/public/Transaction.png" alt="Transaction Logo"></a></p>
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center"><b>Transaction Dashboard</b></h1>
 
-## Available Scripts
+<div align="center">
+A Transaction Dashboard is a website that allows users to efficiently manage and analyze their financial transactions through a user-friendly interface. It provides various functionalities, including transaction listing, search, pagination, statistics, and a bar chart representation of data, all powered by API integrations.
+</div><br/>
 
-In the project directory, you can run:
 
-### `npm start`
+## 🖥️ Tech Stack
+**Frontend:**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Frontend
+[![Frontend](https://skillicons.dev/icons?i=js,react,redux,html,css,tailwind)](https://github.com/AtharvPitrubhakta)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Backend
+[![Backend](https://skillicons.dev/icons?i=nodejs,express,mongo)](https://github.com/AtharvPitrubhakta)
 
-### `npm test`
+### Tools
+[![Tools](https://skillicons.dev/icons?i=git,github,vscode,idea,md,ps)](https://github.com/AtharvPitrubhakta)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+**Deployed On:**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=#00C7B7)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🚀 Key Features
+- Month Selection Dropdown
+- Transaction Listing
+- Transaction Statistics
+- Transaction Bar Chart
+- API Integration
 
-### `npm run eject`
+## Getting Started
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Prerequisites
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Ensure you have the following installed on your machine:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Node.js (v14 or above)
+- npm (v6 or above)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Live Deployed
+[Transaction Dashboard] => (https://trasaction.vercel.app/) 🚀
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Glimpses of Transaction Dashboard 🙈 :
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<table>
+  <tr>
+    <td><img src="https://github.com/AtharvPitrubhakta/Transaction_Management/blob/main/public/images/Month%20Selection%20Dropdown.png" alt="Month Selection Dropdown" /></td>
+    <td><img src="https://github.com/AtharvPitrubhakta/Transaction_Management/blob/main/public/images/Respnsive%20Home%20Page.png" alt="Responsive Home Page" /></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/AtharvPitrubhakta/Transaction_Management/blob/main/public/images/Transaction%20Listing%26%20Statistics.png" alt="Transaction Listing& Statistics" /></td>
+    <td><img src="https://github.com/AtharvPitrubhakta/Transaction_Management/blob/main/public/images/Table%20Section.png" alt="Responsive Statistics Table" /></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/AtharvPitrubhakta/Transaction_Management/blob/main/public/images/Transactions%20Bar%20Chart.png" alt="Transaction Bar Chart" /></td>
+    <td><img src="https://github.com/AtharvPitrubhakta/Transaction_Management/blob/main/public/images/Chart%20Section.png" alt="Responsive Transaction Chart" /></td>
+  </tr>
+</table>
 
-### Code Splitting
+<h2>📬 Contact</h2>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Feel free to get in touch with me through the following channels.
 
-### Analyzing the Bundle Size
+## 🚀 Connect with me
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+[![Github](https://skillicons.dev/icons?i=github)](https://github.com/AtharvPitrubhakta)
+[![Linkedin](https://skillicons.dev/icons?i=linkedin)](https://www.linkedin.com/in/atharv777/)
+[![Twitter](https://skillicons.dev/icons?i=twitter)](https://x.com/atharv0777)
 
-### Making a Progressive Web App
+© 2024 Atharv Pitrubhakta
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
