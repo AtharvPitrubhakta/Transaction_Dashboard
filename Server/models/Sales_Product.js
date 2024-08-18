@@ -31,6 +31,11 @@ const productSchema = new mongoose.Schema({
   }, // Field to indicate if the product is sold
 });
 
-const Product = mongoose.model('Product', productSchema);
+// 1st method of exporting the module
+// const Product = mongoose.model('Product', productSchema);
+// module.exports = Product;
 
-module.exports = Product;
+// 2nd method of exporting the module
+module.exports = mongoose.model('Product', productSchema);
+
+

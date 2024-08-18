@@ -3,7 +3,7 @@ import { getTransactions } from '../api';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
 
-// Register Chart.js components
+// Register Chart.js Components
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
 const TransactionTable = () => {
@@ -22,28 +22,29 @@ const TransactionTable = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await getTransactions(month, search, currentPage);
-        // console.log(response);
+        
+          const response = await getTransactions(month, search, currentPage);
+          // console.log(response);
 
           const data = response?.data?.transactions;
           console.log(data);
+          
           // Extract transactions and pagination details
           const transactionsData = data?.transactions || [];
          
           const totalPages = Math.ceil((data?.total || 0) / (data?.perPage || 10));
-          // const totalPages = data?.total 
-          // console.log(totalPages);
   
           // Update state with the fetched data
           setTransactions(transactionsData);
           setTotalPages(totalPages);
 
           const statisticsResponse = await getTransactions(month);
-          // console.log(statisticsResponse);
           const staticData = statisticsResponse?.data?.statistics;
           setStatistics(staticData);
 
-          const priceRangeResponse = await getTransactions(month, search, currentPage); // Assuming this API also returns price range data
+          const priceRangeResponse = await getTransactions(month, search, currentPage); 
+          // Assuming this API also returns price range data
+          
           const priceRangeDistribution = priceRangeResponse.data.priceRangeDistribution;
           // console.log(priceRangeDistribution)
           setPriceRangeData(priceRangeDistribution);
@@ -58,12 +59,14 @@ const TransactionTable = () => {
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
-    setCurrentPage(1); // Reset to first page on search
+    setCurrentPage(1); 
+    // Reset to first page on search
   };
 
   const handleMonthChange = (e) => {
     setMonth(e.target.value);
-    setCurrentPage(1); // Reset to first page on month change
+    setCurrentPage(1); 
+    // Reset to first page on month change
   };
 
   const handleNextPage = () => {
@@ -94,6 +97,7 @@ const TransactionTable = () => {
 
 return (
   <div className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 min-h-screen font-serif">
+    
     <h1 className="text-4xl font-bold mb-12 text-center font-serif text-[#0A21C0]">
       Comprehensive Transaction Dashboard
       <br />
@@ -196,73 +200,6 @@ return (
       </button>
     </div>
 
-    {/* Price Range Distribution Chart */}
-    {/* <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 shadow-lg rounded-xl flex flex-col justify-center items-center h-[600px]">
-      
-      <h2 className="text-3xl mt-16 font-semibold text-[#0A21C0] mb-2 text-center">
-        Price Range Distribution for {month}
-      </h2>
-       <h3 className="text-2xl text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-[#6366f1] via-[#0ea5e9] to-[#10b981] font-semibold">
-          Discover detailed insights into item distribution across varied price ranges.
-       </h3>
-
-
-
-      <Bar
-        data={chartData}
-        options={{
-          responsive: true,
-          plugins: {
-            legend: {
-              position: 'top',
-              labels: {
-                color: '#374151', // text-gray-700
-                font: {
-                  weight: 'bold',
-                },
-              },
-            },
-            tooltip: {
-              callbacks: {
-                label: (context) => `${context.label}: ${context.raw} items`,
-              },
-              backgroundColor: '#374151', // text-gray-700
-              titleColor: '#FFFFFF', // white text
-              bodyColor: '#FFFFFF', // white text
-            },
-          },
-          scales: {
-            x: {
-              title: {
-                display: true,
-                text: 'Price Range',
-                color: '#4B5563', // text-gray-700
-                font: {
-                  weight: 'bold',
-                },
-              },
-              ticks: {
-                color: '#4B5563', // text-gray-700
-              },
-            },
-            y: {
-              title: {
-                display: true,
-                text: 'Number of Items',
-                color: '#4B5563', // text-gray-700
-                font: {
-                  weight: 'bold',
-                },
-                beginAtZero: true,
-              },
-              ticks: {
-                color: '#4B5563', // text-gray-700
-              },
-            },
-          },
-        }}
-      />
-    </div> */}
     <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 shadow-lg rounded-xl flex flex-col justify-center items-center h-auto md:h-[600px]">
       <h2 className="text-2xl sm:text-3xl mt-8 sm:mt-16 font-semibold text-[#0A21C0] mb-2 text-center">
         Price Range Distribution for {month}
@@ -282,7 +219,7 @@ return (
                 legend: {
                   position: 'top',
                   labels: {
-                    color: '#374151', // text-gray-700
+                    color: '#374151', 
                     font: {
                       weight: 'bold',
                     },
@@ -292,9 +229,9 @@ return (
                   callbacks: {
                     label: (context) => `${context.label}: ${context.raw} items`,
                   },
-                  backgroundColor: '#374151', // text-gray-700
-                  titleColor: '#FFFFFF', // white text
-                  bodyColor: '#FFFFFF', // white text
+                  backgroundColor: '#374151', 
+                  titleColor: '#FFFFFF', 
+                  bodyColor: '#FFFFFF', 
                 },
               },
               scales: {
@@ -302,27 +239,27 @@ return (
                   title: {
                     display: true,
                     text: 'Price Range',
-                    color: '#4B5563', // text-gray-700
+                    color: '#4B5563', 
                     font: {
                       weight: 'bold',
                     },
                   },
                   ticks: {
-                    color: '#4B5563', // text-gray-700
+                    color: '#4B5563', 
                   },
                 },
                 y: {
                   title: {
                     display: true,
                     text: 'Number of Items',
-                    color: '#4B5563', // text-gray-700
+                    color: '#4B5563', 
                     font: {
                       weight: 'bold',
                     },
                     beginAtZero: true,
                   },
                   ticks: {
-                    color: '#4B5563', // text-gray-700
+                    color: '#4B5563', 
                   },
                 },
               },

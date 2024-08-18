@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const { fetchApi } = require("../controller/Api");
-const {listTransactions, getStatistics, getPriceRangeDistribution, getCategoryDistribution, getCombinedData} = require("../controller/Api");
+const { fetchApi } = require("../controllers/Transaction");
+const {listTransactions, getStatistics, getPriceRangeDistribution, getCategoryDistribution, getCombinedData} = require("../controllers/Transaction");
 
 router.get("/fetchApi", fetchApi);
 router.get("/listTransactions", listTransactions);
