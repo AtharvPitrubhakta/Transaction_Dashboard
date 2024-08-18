@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-// Update this with your actual backend URL
-const API_BASE_URL = 'https://trasaction.onrender.com/api/products'; 
+const API_BASE_URL = 'https://transactions-backend-hejp.onrender.com/api/products'; // Update this with your actual backend URL
 
 // Fetch transactions with month, search query, and pagination
 export const getTransactions = async (month, search = '', page = 1, perPage = 10) => {
@@ -12,16 +11,17 @@ export const getTransactions = async (month, search = '', page = 1, perPage = 10
       page,
       perPage,
     });
-
-    
+    // console.log(response);
+    // console.log(response?.data?.statistics);
     if (response.status === 200) {
-      return response;
+      return response; // Ensure the backend returns data in this structure
     } else {
       throw new Error(`Failed to fetch transactions: ${response.statusText}`);
     }
-    
   } catch (error) {
     console.error('Error fetching transactions:', error.message);
-    throw error; 
+    throw error; // Re-throw error to handle it in the component
   }
 };
+
+
