@@ -19,186 +19,186 @@ exports.fetchApi = async (req, res) => {
 }
 
 
-exports.listTransactions = async (req, res) => {
-  try {
-    const { search, page = 1, perPage = 10 } = req.body;
+// exports.listTransactions = async (req, res) => {
+//   try {
+//     const { search, page = 1, perPage = 10 } = req.body;
 
-    // Build the query object
-    const body = {};
+//     // Build the query object
+//     const body = {};
 
-    if (search) {
-      body.$or = [
-        { title: { $regex: search, $options: 'i' } }, // Case-insensitive regex search
-        { description: { $regex: search, $options: 'i' } },
-        { price: { $regex: search, $options: 'i' } }
-      ];
-    }
+//     if (search) {
+//       body.$or = [
+//         { title: { $regex: search, $options: 'i' } }, // Case-insensitive regex search
+//         { description: { $regex: search, $options: 'i' } },
+//         { price: { $regex: search, $options: 'i' } }
+//       ];
+//     }
 
-    // Get total number of documents that match the query
-    const total = await Product.countDocuments(body);
+//     // Get total number of documents that match the query
+//     const total = await Product.countDocuments(body);
 
-    // Fetch data with pagination
-    const transactions = await Product.find(body)
-      .skip((page - 1) * perPage)
-      .limit(parseInt(perPage));
+//     // Fetch data with pagination
+//     const transactions = await Product.find(body)
+//       .skip((page - 1) * perPage)
+//       .limit(parseInt(perPage));
 
-    // Send the response
-    res.json({
-      total,
-      page: parseInt(page),
-      perPage: parseInt(perPage),
-      transactions
-    });
-  } catch (error) {
-    console.error('Error listing transactions:', error);
-    res.status(500).send('Server error');
-  }
-};
-
-
-exports.getStatistics = async (req, res) => {
-  try {
-    const { month } = req.body;
-
-    if (!month) {
-      return res.status(400).send('Month is required');
-    }
-
-    // Convert month name to month number
-    const monthNumber = new Date(`${month} 1, 2023`).getMonth() + 1;
-
-    // Calculate total sale amount for the selected month
-    const totalSaleAmount = await Product.aggregate([
-      {
-        $match: {
-          sold: true,
-          $expr: { $eq: [{ $month: '$dateOfSale' }, monthNumber] },
-        },
-      },
-      {
-        $group: {
-          _id: null,
-          totalAmount: { $sum: '$price' },
-        },
-      },
-    ]);
-
-    // Calculate total number of sold items for the selected month
-    const totalSoldItems = await Product.countDocuments({
-      sold: true,
-      $expr: { $eq: [{ $month: '$dateOfSale' }, monthNumber] },
-    });
-
-    // Calculate total number of not sold items for the selected month
-    const totalNotSoldItems = await Product.countDocuments({
-      sold: false,
-      $expr: { $eq: [{ $month: '$dateOfSale' }, monthNumber] },
-    });
-
-    // Send the response
-    res.json({
-      totalSaleAmount: totalSaleAmount[0]?.totalAmount || 0,
-      totalSoldItems,
-      totalNotSoldItems,
-    });
-  } catch (error) {
-    console.error('Error fetching statistics:', error);
-    res.status(500).send('Server error');
-  }
-};
+//     // Send the response
+//     res.json({
+//       total,
+//       page: parseInt(page),
+//       perPage: parseInt(perPage),
+//       transactions
+//     });
+//   } catch (error) {
+//     console.error('Error listing transactions:', error);
+//     res.status(500).send('Server error');
+//   }
+// };
 
 
-exports.getPriceRangeDistribution = async (req, res) => {
-  try {
-    const { month } = req.body;
+// exports.getStatistics = async (req, res) => {
+//   try {
+//     const { month } = req.body;
 
-    if (!month) {
-      return res.status(400).send('Month is required');
-    }
+//     if (!month) {
+//       return res.status(400).send('Month is required');
+//     }
 
-    // Convert month name to month number
-    const monthNumber = new Date(`${month} 1, 2023`).getMonth() + 1;
+//     // Convert month name to month number
+//     const monthNumber = new Date(`${month} 1, 2023`).getMonth() + 1;
 
-    // Define the price ranges
-    const priceRanges = [
-      { range: '0-100', min: 0, max: 100 },
-      { range: '101-200', min: 101, max: 200 },
-      { range: '201-300', min: 201, max: 300 },
-      { range: '301-400', min: 301, max: 400 },
-      { range: '401-500', min: 401, max: 500 },
-      { range: '501-600', min: 501, max: 600 },
-      { range: '601-700', min: 601, max: 700 },
-      { range: '701-800', min: 701, max: 800 },
-      { range: '801-900', min: 801, max: 900 },
-      { range: '901-above', min: 901, max: Infinity },
-    ];
+//     // Calculate total sale amount for the selected month
+//     const totalSaleAmount = await Product.aggregate([
+//       {
+//         $match: {
+//           sold: true,
+//           $expr: { $eq: [{ $month: '$dateOfSale' }, monthNumber] },
+//         },
+//       },
+//       {
+//         $group: {
+//           _id: null,
+//           totalAmount: { $sum: '$price' },
+//         },
+//       },
+//     ]);
 
-    // Filter by month regardless of year
-    const matchMonthQuery = {
-      $expr: { $eq: [{ $month: '$dateOfSale' }, monthNumber] },
-    };
+//     // Calculate total number of sold items for the selected month
+//     const totalSoldItems = await Product.countDocuments({
+//       sold: true,
+//       $expr: { $eq: [{ $month: '$dateOfSale' }, monthNumber] },
+//     });
 
-    // Aggregate data to get the count of items in each price range
-    const priceRangeData = await Promise.all(
-      priceRanges.map(async (range) => {
-        const count = await Product.countDocuments({
-          ...matchMonthQuery,
-          price: { $gte: range.min, $lte: range.max },
-        });
-        return { range: range.range, count };
-      })
-    );
+//     // Calculate total number of not sold items for the selected month
+//     const totalNotSoldItems = await Product.countDocuments({
+//       sold: false,
+//       $expr: { $eq: [{ $month: '$dateOfSale' }, monthNumber] },
+//     });
 
-    // Send the response
-    res.json(priceRangeData);
-  } catch (error) {
-    console.error('Error fetching price range distribution:', error);
-    res.status(500).send('Server error');
-  }
-};
+//     // Send the response
+//     res.json({
+//       totalSaleAmount: totalSaleAmount[0]?.totalAmount || 0,
+//       totalSoldItems,
+//       totalNotSoldItems,
+//     });
+//   } catch (error) {
+//     console.error('Error fetching statistics:', error);
+//     res.status(500).send('Server error');
+//   }
+// };
 
 
-exports.getCategoryDistribution = async (req, res) => {
-  try {
-    const { month } = req.body;
+// exports.getPriceRangeDistribution = async (req, res) => {
+//   try {
+//     const { month } = req.body;
 
-    if (!month) {
-      return res.status(400).send('Month is required');
-    }
+//     if (!month) {
+//       return res.status(400).send('Month is required');
+//     }
 
-    // Convert month name to month number
-    const monthNumber = new Date(`${month} 1, 2023`).getMonth() + 1;
+//     // Convert month name to month number
+//     const monthNumber = new Date(`${month} 1, 2023`).getMonth() + 1;
 
-    // Filter by month regardless of year
-    const matchMonthQuery = {
-      $expr: { $eq: [{ $month: '$dateOfSale' }, monthNumber] },
-    };
+//     // Define the price ranges
+//     const priceRanges = [
+//       { range: '0-100', min: 0, max: 100 },
+//       { range: '101-200', min: 101, max: 200 },
+//       { range: '201-300', min: 201, max: 300 },
+//       { range: '301-400', min: 301, max: 400 },
+//       { range: '401-500', min: 401, max: 500 },
+//       { range: '501-600', min: 501, max: 600 },
+//       { range: '601-700', min: 601, max: 700 },
+//       { range: '701-800', min: 701, max: 800 },
+//       { range: '801-900', min: 801, max: 900 },
+//       { range: '901-above', min: 901, max: Infinity },
+//     ];
 
-    // Aggregate to find unique categories and count the number of items in each category
-    const categoryData = await Product.aggregate([
-      { $match: matchMonthQuery },
-      {
-        $group: {
-          _id: '$category', // Group by category
-          count: { $sum: 1 }, // Count the number of items in each category
-        },
-      },
-      {
-        $project: {
-          _id: 0,
-          category: '$_id',
-          count: 1,
-        },
-      },
-    ]);
+//     // Filter by month regardless of year
+//     const matchMonthQuery = {
+//       $expr: { $eq: [{ $month: '$dateOfSale' }, monthNumber] },
+//     };
 
-    // Send the response
-    res.json(categoryData);
-  } catch (error) {
-    console.error('Error fetching category distribution:', error);
-    res.status(500).send('Server error');
-  }
-};
+//     // Aggregate data to get the count of items in each price range
+//     const priceRangeData = await Promise.all(
+//       priceRanges.map(async (range) => {
+//         const count = await Product.countDocuments({
+//           ...matchMonthQuery,
+//           price: { $gte: range.min, $lte: range.max },
+//         });
+//         return { range: range.range, count };
+//       })
+//     );
+
+//     // Send the response
+//     res.json(priceRangeData);
+//   } catch (error) {
+//     console.error('Error fetching price range distribution:', error);
+//     res.status(500).send('Server error');
+//   }
+// };
+
+
+// exports.getCategoryDistribution = async (req, res) => {
+//   try {
+//     const { month } = req.body;
+
+//     if (!month) {
+//       return res.status(400).send('Month is required');
+//     }
+
+//     // Convert month name to month number
+//     const monthNumber = new Date(`${month} 1, 2023`).getMonth() + 1;
+
+//     // Filter by month regardless of year
+//     const matchMonthQuery = {
+//       $expr: { $eq: [{ $month: '$dateOfSale' }, monthNumber] },
+//     };
+
+//     // Aggregate to find unique categories and count the number of items in each category
+//     const categoryData = await Product.aggregate([
+//       { $match: matchMonthQuery },
+//       {
+//         $group: {
+//           _id: '$category', // Group by category
+//           count: { $sum: 1 }, // Count the number of items in each category
+//         },
+//       },
+//       {
+//         $project: {
+//           _id: 0,
+//           category: '$_id',
+//           count: 1,
+//         },
+//       },
+//     ]);
+
+//     // Send the response
+//     res.json(categoryData);
+//   } catch (error) {
+//     console.error('Error fetching category distribution:', error);
+//     res.status(500).send('Server error');
+//   }
+// };
 
 
 // Combined API
