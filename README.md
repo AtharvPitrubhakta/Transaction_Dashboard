@@ -19,7 +19,7 @@ A Transaction Dashboard is a website that allows users to efficiently manage and
 [![Backend](https://skillicons.dev/icons?i=nodejs,express,mongo)](https://github.com/AtharvPitrubhakta)
 
 ### Tools
-[![Tools](https://skillicons.dev/icons?i=git,github,vscode,idea,md,ps)](https://github.com/AtharvPitrubhakta)
+[![Tools](https://skillicons.dev/icons?i=git,github,vscode,postman,compass)](https://github.com/AtharvPitrubhakta)
 
 
 **Deployed On:**
